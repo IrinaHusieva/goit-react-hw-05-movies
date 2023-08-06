@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[947],{947:function(t,e,a){a.r(e),a.d(e,{MovieDetails:function(){return o}});a(791);var r=a(184),o=function(t){var e=t.movieData;return(0,r.jsx)("div",{children:(0,r.jsx)("img",{src:e.poster_path?"https://image.tmdb.org/t/p/w500/".concat(e.poster_path):"https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700",width:250,alt:"poster"})})}}}]);
+//# sourceMappingURL=947.6c57a487.chunk.js.map
