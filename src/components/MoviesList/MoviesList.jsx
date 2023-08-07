@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getTrendingMovies } from '../../api/api';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const MoviesList = () => {
   const [movies, setMovies] = useState([]);
@@ -17,19 +17,19 @@ const MoviesList = () => {
   }, []);
 
    return (
-    <div>
-      {error && <div>{error}</div>}
+        <div>
+            {error && <div>{error}</div>}
 
-      <h1>Trending Movies</h1>
-      <ul>
-        {movies.map((movie) => (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>{movie.title}</Link> 
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+            <h1>Trending Movies</h1>
+            <ul>
+                {movies.map((movie) => (
+                    <li key={movie.id}>
+                        <NavLink to={`/movies/${movie.id}`}>{movie.title ? movie.title : movie.name}</NavLink>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
 };
 
 export default MoviesList;
