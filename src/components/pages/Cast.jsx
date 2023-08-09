@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { getMovieCredits } from '../../api/api';
 
- const Cast = ({ movieId }) => {
-  //  const { movieId } = useParams();
-   const [movieCredits, setMovieCredits] = useState([]);
+const Cast = ({ movieId }) => {
+  const [movieCredits, setMovieCredits] = useState([]);
   const [error, setError] = useState(null);
   useEffect(() => {
     getMovieCredits(movieId)
@@ -15,20 +13,26 @@ import { getMovieCredits } from '../../api/api';
         setError('Error fetching trending movies: ' + error.message);
       });
   }, [movieId]);
-return(
-  <div>
+  const defaultImgCast = 'https://cdn-icons-png.flaticon.com/512/4054/4054617.png';
+return (
+    <div>
       <h1>Cast</h1>
-      {movieCredits.map((actor) => (
-        <div key={actor.id}>
-          <img
-            src={`https://image.tmdb.org/t/p/w200/${actor.profile_path}`}
-            alt={actor.name}
-          />
-          <p>{actor.name}</p>
-        </div>
-      ))}
+      {error ? (
+        <p>Error: {error}</p>
+      ) : (
+        movieCredits.map((actor) => (
+          <div key={actor.id}>
+            <img
+              src={actor.profile_path ? `https://image.tmdb.org/t/p/w200/${actor.profile_path}` : defaultImgCast}
+              alt={actor.name}
+              width={200}
+            />
+            <p>{actor.name}</p>
+          </div>
+        ))
+      )}
     </div>
-)
+  );
 };
 
 export default Cast;

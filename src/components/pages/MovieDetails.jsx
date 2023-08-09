@@ -1,14 +1,25 @@
-
 import React, { useEffect, useState } from 'react';
-import { useParams, NavLink, Route, Routes } from 'react-router-dom';
+import { useParams, NavLink, Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import { getMovieDetails } from '../../api/api';
 import Cast from './Cast';
 import Reviews from './Reviews';
 
 const MovieDetails = () => {
-   const { movieId } = useParams();
+  const { movieId } = useParams();
   const [moviesDetails, setMoviesDetails] = useState([]);
   const [error, setError] = useState(null);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const onGoBack = () => {
+    if (location.pathname.includes('/movies')) {
+      navigate(-1);
+    } else {
+      navigate('/');
+    }
+  };
+
   useEffect(() => {
     getMovieDetails(movieId)
       .then((moviesDetails) => {
@@ -18,6 +29,7 @@ const MovieDetails = () => {
         setError('Error fetching trending movies: ' + error.message);
       });
   }, [movieId]);
+
   const defaultImg = 'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
  if (error) {
     return <div>{error}</div>;
@@ -29,6 +41,7 @@ const MovieDetails = () => {
   const percentLiked = voteAverage ? (voteAverage / 10) * 100 : null;
   return (
     <div>
+      <button type='button' onClick={onGoBack}>Go back</button>
       <img
         src={moviesDetails.poster_path ? `https://image.tmdb.org/t/p/w500/${moviesDetails.poster_path}` : defaultImg}
         width={250}
@@ -56,9 +69,9 @@ const MovieDetails = () => {
           <li><NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink></li>
         </ul>
       </div>
-        <Routes>
-        <Route path="/movies/:movieId/cast" element={<Cast />} />
-        <Route path="/movies/:movieId/*" element={<Reviews movieId={movieId} />} />
+      <Routes>
+        <Route path="cast" element={<Cast movieId={movieId} />} />
+        <Route path="reviews" element={<Reviews movieId={movieId} />} />
       </Routes>
     </div>
   );

@@ -1,20 +1,35 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { getMovieReviews } from '../../api/api';
 
-const Reviews = () => {
-  const { movieId } = useParams();
-
+const Cast = ({ movieId }) => {
+  const [movieReviews, setMovieReviews] = useState([]);
+  const [error, setError] = useState(null);
   useEffect(() => {
-    if (!movieId) {
-      // Повернення назад або інше дії, якщо movieId відсутній
-    }
+    getMovieReviews(movieId)
+      .then((movieReviews) => {
+        setMovieReviews(movieReviews);
+      })
+      .catch((error) => {
+        setError('Error fetching trending movies: ' + error.message);
+      });
   }, [movieId]);
-
-  return (
+  
+ return (
     <div>
-      {/* Вміст сторінки інформації про огляди */}
+      {movieReviews.length > 0 ? (
+        <ul>
+          {movieReviews.map((author) => (
+            <li key={author.id}>
+              <h3>{author.author}</h3>
+              <p>{author.content}</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>{error ? `Error: ${error}` : "We don't have any reviews for this movie."}</p>
+      )}
     </div>
   );
-}
-export default Reviews;
+};
 
+export default Cast;
