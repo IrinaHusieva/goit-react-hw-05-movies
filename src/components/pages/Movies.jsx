@@ -5,6 +5,7 @@ import { searchMovies } from '../../api/api';
 const Movies = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [searchPerformed, setSearchPerformed] = useState(false); // Додайте новий стан
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -12,6 +13,7 @@ const Movies = () => {
     try {
       const movies = await searchMovies(query);
       setSearchResults(movies);
+      setSearchPerformed(true); // Позначте, що пошук виконано
     } catch (error) {
       console.error('Error searching movies:', error);
     }
@@ -39,7 +41,7 @@ const Movies = () => {
     setSearchParams({ query: query });
   };
 
-return (
+  return (
     <div>
       <h1>Search Movies</h1>
       <input
@@ -48,7 +50,7 @@ return (
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <button onClick={() => handleSubmitSearchTerm(searchTerm)}>Search</button>
-      {searchResults.length > 0 ? (
+      {searchPerformed && searchResults.length > 0 ? (
         <div>
           <h2>Search Results</h2>
           <ul>
@@ -59,9 +61,9 @@ return (
             ))}
           </ul>
         </div>
-      ) : (
+      ) : searchPerformed && searchResults.length === 0 ? (
         <p>No movies found for your search.</p>
-      )}
+      ) : null}
       <button onClick={onGoBack}>Go Back</button>
     </div>
   );
