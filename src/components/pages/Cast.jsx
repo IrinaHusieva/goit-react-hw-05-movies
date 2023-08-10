@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getMovieCredits } from '../../api/api';
+import styles from './Cast.module.css'
 
 const Cast = ({ movieId }) => {
   const [movieCredits, setMovieCredits] = useState([]);
@@ -14,22 +15,24 @@ const Cast = ({ movieId }) => {
       });
   }, [movieId]);
   const defaultImgCast = 'https://cdn-icons-png.flaticon.com/512/4054/4054617.png';
-return (
-    <div>
-      <h1>Cast</h1>
+ return (
+    <div className={styles.castContainer}>
+      <h1 className={styles.heading}>Cast</h1>
       {error ? (
-        <p>Error: {error}</p>
+        <p className={styles.error}>Error: {error}</p>
       ) : (
-        movieCredits.map((actor) => (
-          <div key={actor.id}>
-            <img
-              src={actor.profile_path ? `https://image.tmdb.org/t/p/w200/${actor.profile_path}` : defaultImgCast}
-              alt={actor.name}
-              width={200}
-            />
-            <p>{actor.name}</p>
-          </div>
-        ))
+        <div className={styles.castList}>
+          {movieCredits.map((actor) => (
+            <div key={actor.id} className={styles.actorItem}>
+              <img
+                src={actor.profile_path ? `https://image.tmdb.org/t/p/w200/${actor.profile_path}` : defaultImgCast}
+                alt={actor.name}
+                width={200}
+              />
+              <p>{actor.name}</p>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

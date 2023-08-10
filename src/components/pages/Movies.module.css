@@ -1,0 +1,53 @@
+.moviesContainer {
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+.searchInput {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 300px;
+  margin-right: 10px;
+}
+
+.searchButton {
+  padding: 8px 15px;
+  border: none;
+  background-color: #ff5733;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.resultsContainer {
+  margin-top: 20px;
+}
+
+.resultsList {
+  list-style: none;
+  padding: 0;
+}
+
+.resultsListItem {
+  margin-bottom: 10px;
+}
+.movieLink {
+  padding-left: 5px;
+  text-decoration: none;
+  color: #38290d96;
+  font-size: 18px;
+  transition: color 0.3s ease-in-out;
+}
+.movieLink:hover {
+  color: #ff5733;
+}
+.goBackButton {
+  padding: 8px 15px;
+  border: none;
+  background-color: #ff5733;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}

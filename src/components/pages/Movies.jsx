@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { searchMovies } from '../../api/api';
+import styles from "./Movies.module.css";
 
 const Movies = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -42,21 +43,23 @@ const Movies = () => {
   };
 
   return (
-    <div>
+    <div className={styles.moviesContainer}>
       <h1>Search Movies</h1>
       <input
+        className={styles.searchInput}
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <button onClick={() => handleSubmitSearchTerm(searchTerm)}>Search</button>
+      <button className={styles.searchButton} onClick={() => handleSubmitSearchTerm(searchTerm)}>Search</button>
       {searchPerformed && searchResults.length > 0 ? (
-        <div>
+        <div className={styles.resultsContainer}>
           <h2>Search Results</h2>
-          <ul>
+            <button className={styles.goBackButton}  onClick={onGoBack}>Go Back</button>
+          <ul className={styles.resultsList}>
             {searchResults.map((movie) => (
-              <li key={movie.id}>
-                <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+              <li className={styles.resultsListItem} key={movie.id}>
+                <Link className={styles.movieLink}  to={`/movies/${movie.id}`}>{movie.title}</Link>
               </li>
             ))}
           </ul>
@@ -64,7 +67,6 @@ const Movies = () => {
       ) : searchPerformed && searchResults.length === 0 ? (
         <p>No movies found for your search.</p>
       ) : null}
-      <button onClick={onGoBack}>Go Back</button>
     </div>
   );
 };

@@ -1,0 +1,28 @@
+.movieDetails {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.goBackButton {
+  padding: 8px 15px;
+  border: none;
+  background-color: #ff5733;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.backbtn {
+  padding-left: 10px;
+  padding-top: 10px;
+}
+.link {
+  text-decoration: none;
+  color: #38290d96;
+  font-size: 18px;
+  transition: color 0.3s ease-in-out;
+}
+
+.link:hover {
+  color: #ff5733;
+}

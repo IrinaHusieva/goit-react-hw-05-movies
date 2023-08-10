@@ -1,0 +1,29 @@
+.error {
+  color: red;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.heading {
+  font-size: 30px;
+}
+
+.movieList {
+  list-style: none;
+  padding: 0;
+}
+
+.movieItem {
+  margin-bottom: 10px;
+}
+
+.movieLink {
+  padding-left: 5px;
+  text-decoration: none;
+  color: #38290d96;
+  font-size: 18px;
+  transition: color 0.3s ease-in-out;
+}
+.movieLink:hover {
+  color: #ff5733;
+}

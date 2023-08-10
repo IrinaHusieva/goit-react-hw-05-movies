@@ -3,6 +3,7 @@ import { useParams, NavLink, Route, Routes, useNavigate, useLocation } from 'rea
 import { getMovieDetails } from '../../api/api';
 import Cast from './Cast';
 import Reviews from './Reviews';
+import styles from './MovieDetails.module.css'
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -40,13 +41,18 @@ const MovieDetails = () => {
   const voteAverage = moviesDetails.vote_average;
   const percentLiked = voteAverage ? (voteAverage / 10) * 100 : null;
   return (
-    <div>
-      <button type='button' onClick={onGoBack}>Go back</button>
+    <>
+      <div className={styles.backbtn}>
+    <button type='button' onClick={onGoBack} className={styles.goBackButton}>
+        Go back
+        </button>
+        </div>
+    <div className={styles.movieDetails}>
       <img
         src={moviesDetails.poster_path ? `https://image.tmdb.org/t/p/w500/${moviesDetails.poster_path}` : defaultImg}
         width={250}
         alt="poster"
-      />
+        />
       <h2>{moviesDetails.title ? moviesDetails.title : moviesDetails.name}</h2>
       <p>User Score: {Math.round(percentLiked)} %</p>
       <div>
@@ -65,15 +71,17 @@ const MovieDetails = () => {
       <div>
         <h2>Additional information</h2>
         <ul>
-          <li><NavLink to={`/movies/${movieId}/cast`}>Cast</NavLink></li>
-          <li><NavLink to={`/movies/${movieId}/reviews`}>Reviews</NavLink></li>
+          <li><NavLink className={styles.link} to={`/movies/${movieId}/cast`}>Cast</NavLink></li>
+          <li><NavLink className={styles.link} to={`/movies/${movieId}/reviews`}>Reviews</NavLink></li>
+          
         </ul>
       </div>
       <Routes>
         <Route path="cast" element={<Cast movieId={movieId} />} />
         <Route path="reviews" element={<Reviews movieId={movieId} />} />
       </Routes>
-    </div>
+      </div>
+      </>
   );
 }
 export default MovieDetails;

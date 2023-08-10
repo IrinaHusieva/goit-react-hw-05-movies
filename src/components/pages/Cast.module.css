@@ -1,0 +1,28 @@
+.castContainer {
+  padding: 20px;
+}
+
+.heading {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.castList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.actorItem {
+  text-align: center;
+}
+
+.actorItem img {
+  max-width: 100%;
+}

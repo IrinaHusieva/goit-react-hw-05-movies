@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getMovieReviews } from '../../api/api';
+import styles from './Reviews.module.css'
 
 const Cast = ({ movieId }) => {
   const [movieReviews, setMovieReviews] = useState([]);
@@ -15,18 +16,20 @@ const Cast = ({ movieId }) => {
   }, [movieId]);
   
  return (
-    <div>
+    <div className={styles.reviewsContainer}>
       {movieReviews.length > 0 ? (
-        <ul>
+        <ul className={styles.reviewList}>
           {movieReviews.map((author) => (
-            <li key={author.id}>
-              <h3>{author.author}</h3>
-              <p>{author.content}</p>
+            <li key={author.id} className={styles.reviewItem}>
+              <h3 className={styles.authorName}>{author.author}</h3>
+              <p className={styles.reviewContent}>{author.content}</p>
             </li>
           ))}
         </ul>
       ) : (
-        <p>{error ? `Error: ${error}` : "We don't have any reviews for this movie."}</p>
+        <p className={styles.noReviews}>
+          {error ? `Error: ${error}` : "We don't have any reviews for this movie."}
+        </p>
       )}
     </div>
   );
